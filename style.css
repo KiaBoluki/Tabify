@@ -1,0 +1,93 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+
+  background: none;
+  border:none;
+  outline: none;
+
+  color: white;
+  font-family: "noto sans arabic", sans-serif;
+  font-weight: 100;
+}
+
+body{
+  direction: rtl;
+  background-image: url('./images/bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  height: 100vh;
+
+  /*
+  وسط قراردادن محتویات بادی
+  */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card{
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 30%;
+  height: 30%;
+  padding: 1rem;
+  border-radius: 1rem;
+  min-width: 30rem;
+  min-height: 10rem;
+}
+
+h1{
+  text-align: center;
+}
+
+form{
+  position: relative;
+}
+
+input{
+  border-bottom: 2px solid;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+}
+
+input::placeholder{
+  color: white;
+}
+
+button{
+
+  width: 1.5rem;
+  height: 1.5rem;
+  background-image: url("./images/magnifier.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.links{
+  margin-top: 1rem;
+  direction: ltr;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+a{
+  text-decoration: none;
+}
+
+a img{
+  width: 1rem;
+}
+
