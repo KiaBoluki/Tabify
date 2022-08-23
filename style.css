@@ -8,13 +8,13 @@
   outline: none;
 
   color: white;
-  font-family: "noto sans arabic", sans-serif;
-  font-weight: 100;
+  font-family: 'Vazirmatn', sans-serif;
+
 }
 
 body{
   direction: rtl;
-  background-image: url('./images/bg.png');
+  background-image: url('https://picsum.photos/1280/720');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -32,7 +32,7 @@ body{
 .card{
   background-color: rgba(0, 0, 0, 0.5);
   width: 30%;
-  height: 30%;
+  min-height: 30%;
   padding: 1rem;
   border-radius: 1rem;
   min-width: 30rem;
@@ -90,4 +90,15 @@ a{
 a img{
   width: 1rem;
 }
+
+.time-date{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+p{
+  font-size: 1.2rem;
+}
+
 
