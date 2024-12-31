@@ -3,6 +3,7 @@ const timeElement = document.getElementById('time')
 const greetingElement = document.getElementById('greeting')
 const gDateElement = document.getElementById('gDate')
 const quoteElement = document.getElementById('quote')
+const authorElement = document.getElementById('author')
 /**
  * Read the local storage and show it in the 
  * Greeting Label if there is one
@@ -69,6 +70,7 @@ async function getQuote() {
     const response = await fetch(url, options);
     const data = await response.json()
     quoteElement.textContent = data[0].content;
+    authorElement.textContent = data[0].author;
     
 }
 
