@@ -100,20 +100,28 @@ p {
   font-size: 1.2rem;
 }
 
-#gDate{
+#gDate {
   text-shadow: 1px 1px 3px gray;
 }
 
-#quote {
+.quote {
   margin-top: 1rem;
-  text-align: center;
-  font-size: 1.2rem;
-  font-style: italic;
-  /* a handwriting font */
-  font-family: "Dancing Script", cursive;
-  text-shadow: 1px 1px 3px gray;
   direction: ltr;
   padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
-  
+
+}
+
+.quote q{
+  font-family: Roboto, sans;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.quote p{
+  font-family: Roboto, sans;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 0.8rem;
 }
