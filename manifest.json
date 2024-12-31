@@ -1,0 +1,10 @@
+{
+  "manifest_version" : 3,
+  "name" : "Tabify", 
+  "description": "This is a Chrome Extension for new tabs",
+  "version" : "1.0",
+  "chrome_url_overrides" : { "newtab" : "index.html" },
+  "permissions" : [ "tabs","storage" ],
+  "icons" : { "128" : "/assets/images/kia.png" },
+  "options_page": "/assets/pages/options.html"
+}
