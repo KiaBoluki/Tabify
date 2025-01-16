@@ -6,9 +6,7 @@
   background: none;
   border: none;
   outline: none;
-
-  color: white;
-  font-family: "Vazirmatn", sans-serif;
+  color: #ddd;
 }
 
 body {
@@ -37,6 +35,7 @@ body {
   border-radius: 1rem;
   min-width: 30rem;
   min-height: 10rem;
+  font-family: "Vazirmatn", sans;
 }
 
 h1 {
@@ -80,15 +79,46 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  & a:hover {
+    cursor: pointer;
+    outline: 2px solid white;
+    border-radius: 3px;
+    transition: all 0.1s;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 a {
   text-decoration: none;
+  gap: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
+  text-transform: uppercase;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 a img {
-  width: 1rem;
+  display: inline-block;
+  height: 0.9rem;
+  aspect-ratio: 1;
+  object-fit: contain;
+  border-radius: 3px;
+  vertical-align: middle;
 }
+
+a span{
+  display: inline-block;
+  padding: 0; 
+  line-height: .8rem;
+  vertical-align: middle;
+}
+
 
 .time-date {
   display: flex;
@@ -105,23 +135,17 @@ p {
 }
 
 .quote {
+  font-family: monospace !important;
   margin-top: 1rem;
+  font-size: 1.2rem;
   direction: ltr;
   padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: 1rem;
+  border-top: 1px solid white;
+  font-size: medium;
 
+  & p {
+    font-size: 0.8rem;
+    font-style: italic;
+  }
 }
 
-.quote q{
-  font-family: Roboto, sans;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.quote p{
-  font-family: Roboto, sans;
-  font-weight: 400;
-  font-style: italic;
-  font-size: 0.8rem;
-}
