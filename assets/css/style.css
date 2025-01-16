@@ -76,8 +76,8 @@ button {
 .links {
   margin-top: 1rem;
   direction: ltr;
-  display: flex;
   align-items: center;
+  display: flex;
   justify-content: space-between;
   & a:hover {
     cursor: pointer;
@@ -97,26 +97,19 @@ a {
   font-size: 0.8rem;
   line-height: 1.2rem;
   text-transform: uppercase;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 a img {
-  display: inline-block;
   height: 0.9rem;
   aspect-ratio: 1;
   object-fit: contain;
   border-radius: 3px;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
 a span{
-  display: inline-block;
   padding: 0; 
   line-height: .8rem;
-  vertical-align: middle;
 }
 
 
