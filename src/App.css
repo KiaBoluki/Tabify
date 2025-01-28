@@ -1,11 +1,9 @@
-.container{
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #c2c2c2;
-  /* background-image: url('https://picsum.photos/1600/900'); */
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Vazirmatn:wght@100..900&display=swap');
+
+.wrapper{
+    background-image: url('https://picsum.photos/1280/760');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
