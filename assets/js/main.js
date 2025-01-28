@@ -55,6 +55,7 @@ setInterval(updateDateTime, 1000)
  * and show it in the quote label
  */
 async function getQuote() {
+  quoteElement.textContent = "Loading..."
   /** set no-cors header to avoid cors error */
   const url = "https://api.realinspire.tech/v1/quotes/random";
   const options = {
