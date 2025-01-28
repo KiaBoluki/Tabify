@@ -16,7 +16,6 @@ try {
   
 }
 
-
 /**
  * @type function
  * 
@@ -44,10 +43,7 @@ function updateDateTime() {
 }
 
 
-/**
- * Updates Date and time every 1 second
- */
-setInterval(updateDateTime, 1000)
+
 
 /**
  * 
@@ -55,19 +51,20 @@ setInterval(updateDateTime, 1000)
  * and show it in the quote label
  */
 async function getQuote() {
-  quoteElement.textContent = "Loading..."
-  /** set no-cors header to avoid cors error */
-  const url = "https://api.realinspire.tech/v1/quotes/random";
-  const options = {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET',
-      'Access-Control-Allow-Headers': 'Content-Type, Authorization'
+
+  
+    /** set no-cors header to avoid cors error */
+    const url = "https://api.realinspire.tech/v1/quotes/random";
+    const options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization'
       }
     }
-
+    
     const response = await fetch(url, options);
     const data = await response.json()
     quoteElement.textContent = data[0].content;
@@ -75,4 +72,9 @@ async function getQuote() {
     
 }
 
-getQuote()
+document.addEventListener('DOMContentLoaded', () => {
+  updateDateTime();
+  setInterval(updateDateTime, 1000);
+  getQuote();
+})
+
