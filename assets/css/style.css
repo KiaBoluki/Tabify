@@ -10,11 +10,15 @@
 
 body {
   direction: rtl;
+}
+
+.container{
   background-image: url("https://picsum.photos/1280/720");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
 
   /*
   وسط قراردادن محتویات بادی
