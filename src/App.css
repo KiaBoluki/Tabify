@@ -1,0 +1,11 @@
+.container{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #c2c2c2;
+  /* background-image: url('https://picsum.photos/1600/900'); */
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
