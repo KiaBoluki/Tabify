@@ -1,15 +1,15 @@
+
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: white;
-  background: none;
-  border: none;
-  outline: none;
 }
 
 body {
-  direction: rtl;
+  font-family: "Vazirmatn", sans-serif;
+  background-color: #121212;
+  color: white;
 }
 
 .container{
@@ -19,10 +19,6 @@ body {
   background-size: cover;
   height: 100dvh;
   overflow: hidden;
-
-  /*
-  وسط قراردادن محتویات بادی
-  */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,40 +43,6 @@ body {
   }
 }
 
-h1 {
-  text-align: center;
-}
-
-form {
-  position: relative;
-}
-
-input {
-  border-bottom: 2px solid;
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  font-size: 1.2rem;
-}
-
-input::placeholder {
-  color: white;
-}
-
-button {
-  width: 1.5rem;
-  height: 1.5rem;
-  background-image: url("/assets/images/magnifier.png");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  position: absolute;
-
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
 
 .links {
   margin-top: 1rem;
@@ -91,6 +53,7 @@ button {
 }
 
 a {
+  color: white; 
   text-decoration: none;
   gap: 0.25rem;
   padding: 0.25rem 0.5rem;
@@ -125,11 +88,9 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  direction: rtl;
 }
 
-p {
-  font-size: 1.2rem;
-}
 
 .quote {
   font-family: "Playfair Display";
@@ -150,4 +111,7 @@ p {
   width: 24px;
   display: block;
   margin-top: 2rem;
+}
+h1{
+  text-align: center;
 }
