@@ -1,7 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Vazirmatn:wght@100..900&display=swap');
-.html{
-    box-sizing: border-box;
-}
 
 .wrapper{
     background-image: url('https://picsum.photos/1280/760');
@@ -9,7 +6,6 @@
     background-position: center;
     background-repeat: no-repeat;
     height: 100vh;
-    font-family: 'Vazirmatn';
     color: white; 
     font-weight: bold;
 }

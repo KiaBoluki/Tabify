@@ -1,6 +1,7 @@
 import "./App.css";
 import Card from "./components/Card";
 import DateTime, { PersianDate, PersianTime } from "./components/DateTime";
+import Qoute from "./components/Qoute";
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
         <div className="flex items-center justify-between">
           <PersianTime />
           <PersianDate />
+        </div>
+        <div>
+          <Qoute/>
         </div>
       </Card>
     </div>

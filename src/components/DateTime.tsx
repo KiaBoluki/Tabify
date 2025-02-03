@@ -55,7 +55,7 @@ const DateTime = () => {
   }, []);
 
   return (
-    <div>
+    <div className="ltr font-thin">
       {currentTime.toLocaleDateString('en-US', {
         month:"long", day: "2-digit"
       })}
