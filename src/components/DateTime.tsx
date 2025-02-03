@@ -1,26 +1,66 @@
-const currentDate = new Date();
+import { useState, useEffect } from "react";
+
+export const PersianDate = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+  const persianDate = currentTime.toLocaleDateString("fa-IR", {
+    day: "2-digit",
+    weekday: "long",
+    month: "long",
+  });
+
+   useEffect(() => {
+     const interval = setInterval(() => {
+       setCurrentTime(new Date());
+     }, 1000);
+
+     // Cleanup interval on component unmount
+     return () => clearInterval(interval);
+   }, []);
+
+  return <div>{persianDate}</div>;
+};
+
+export const PersianTime = () => {
+  const [currentTime, setCurrentTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
+
+const persianTime = currentTime.toLocaleTimeString("fa-IR", {
+  hour: "2-digit",
+  minute: "2-digit",
+});
+  return (
+    <div>
+      {persianTime}
+    </div>
+  ); 
+};
 
 const DateTime = () => {
-  return <>{currentDate.toLocaleDateString("en-US", { day: "2-digit" })}</>;
-};
+  const [currentTime, setCurrentTime] = useState(new Date());
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
 
-const PersianDate = () => {
-  return {
-    weekday: currentDate.toLocaleDateString("fa-IR", { weekday: "long" }),
-    day: currentDate.toLocaleDateString("fa-IR", { day: "2-digit" }),
-    month: currentDate.toLocaleDateString("fa-IR", { month: "long" }),
-    year: currentDate.toLocaleDateString("fa-IR", { year: "numeric" }),
-  };
-};
+    // Cleanup interval on component unmount
+    return () => clearInterval(interval);
+  }, []);
 
-const PersianShortDate = () => {
   return (
-    
-      <h1 className="text-center text-5xl font-bold font-[Vazirmatn]">
-        {PersianDate().weekday} {PersianDate().day} {PersianDate().month}
-      </h1>
-    
-  );
+    <div>
+      {currentTime.toLocaleDateString('en-US', {
+        month:"long", day: "2-digit"
+      })}
+    </div>
+  ); 
 };
+
 export default DateTime;
-export { DateTime, PersianDate, PersianShortDate };
