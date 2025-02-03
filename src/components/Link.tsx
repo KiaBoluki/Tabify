@@ -1,49 +1,38 @@
-import React , { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { LINK_DETAILS, DetailsProps } from "./linkDetails";
 interface LinkProps {
-    to: string; 
+  to: string;
 }
 
-const Link: React.FC<LinkProps> =  ({to}) => {
-    const [text, setText] = useState('');
-    const [url, setUrl] = useState("#"); 
-    useEffect(()=>{
-       switch (to) {
-         case "youtube":
-           setText("YouTube");
-           setUrl("https://youtube.com");
-           break;
-         case "gmail":
-           setText("Gmail");
-           setUrl("https://gmail.com");
-           break;
-         case "x":
-           setText("X");
-           setUrl("https://X.com");
-           break;
+const Link: React.FC<LinkProps> = ({ to }) => {
+  const [details, setDetails] = useState<DetailsProps | null>(null);
 
-         case "telegram":
-           setText("Telegram");
-           setUrl("https://web.telegram.org");
-           break;
+  useEffect(() => {
+    // Set details based on the `to` prop
+    if (LINK_DETAILS[to]) {
+      setDetails(LINK_DETAILS[to]);
+    } else {
+      setDetails(null); // Handle unknown links
+    }
+  }, []);
 
-         case "whatsapp":
-           setText("Whatsapp");
-           setUrl("https://web.whatsapp.com");
-           break;
+  if (!details) {
+    return null; // Return nothing if details are not found
+  }
 
-         default:
-           break;
-       }
-    }, [to]); 
-
-    return (
-      <a
-        href={url}
-        className="inline-block border-b-2 border-b-transparent transition duration-500 w-full text-center p-2 hover:text-amber-400 hover:border-b-amber-400"
-      >
-        {text}
-      </a>
-    ); 
-}
+  return (
+    <a
+      href={details.url}
+      className="flex items-center space-x-2 border-b-2 border-b-transparent transition duration-500 text-center p-2 hover:border-b-white"
+    >
+      <img
+        src={details.icon}
+        alt={details.text}
+        className="w-5 h-5 object-contain inline-block align-middle"
+      />
+      <span className="inline-block align-middle">{details.text}</span>
+    </a>
+  );
+};
 
 export default Link;

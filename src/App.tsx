@@ -1,12 +1,13 @@
 import "./App.css";
 import Card from "./components/Card";
 import DateTime, { PersianDate, PersianTime } from "./components/DateTime";
-import Link from "./components/Link";
+import Links from "./components/Links";
 import Qoute from "./components/Qoute";
+import Wrapper from "./components/Wrapper";
 
 function App() {
   return (
-    <div className="wrapper text-white bg-slate-300 min-h-screen flex justify-center items-center">
+    <Wrapper>
       <Card>
         <div className="flex items-center justify-center">
           <DateTime />
@@ -18,14 +19,9 @@ function App() {
         <div className="my-6">
           <Qoute />
         </div>
-        <div className="text-sm font-light grid grid-cols-4">
-          <Link to="youtube" />
-          <Link to="telegram" />
-          <Link to="whatsapp" />
-          <Link to="gmail" />
-        </div>
+        <Links />
       </Card>
-    </div>
+    </Wrapper>
   );
 }
 
