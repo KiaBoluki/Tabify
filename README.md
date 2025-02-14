@@ -33,7 +33,7 @@
 ## How It Works
 
 - **Background Images**: Tabify fetches a random image from [Picsum Photos](https://picsum.photos) each time you open a new tab.
-- **Quotes**: It retrieves a quote from [RealInspire API](https://api.realinspire.tech) to inspire you throughout the day.
+- **Quotes**: It retrieves a quote from [RealInspire API](https://api.realinspire.tech/v1/quotes/random) to inspire you throughout the day.
 - **Date Display**: The current date is displayed in both the Gregorian and Persian formats for your convenience.
 
 ## Customization
