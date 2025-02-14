@@ -2,6 +2,11 @@
 
 **Tabify** is a Chrome® extension designed to make your new tab page more beautiful and inspiring. Every time you open a new tab, Tabify loads a stunning random image from [Picsum Photos](https://picsum.photos) as the background. Additionally, it displays a wise and thought-provoking quote fetched from [RealInspire API](https://api.realinspire.tech). To make it even more useful, Tabify shows the current date in both the Gregorian and Persian calendars.
 
+### Screenshots
+
+![Tabify Screenshot](screenshot.png)  
+*Example of Tabify in action with a random background image, quote, and dual calendar display.*
+
 ## Features
 
 - **Dynamic Backgrounds**: Enjoy a fresh, random image every time you open a new tab.
@@ -57,8 +62,5 @@ If you encounter any issues or have suggestions for improvement, please [open an
 
 ---
 
-### Screenshots
 
-![Tabify Screenshot](screenshot.png)  
-*Example of Tabify in action with a random background image, quote, and dual calendar display.*
 
