@@ -46,7 +46,9 @@ body {
     translate: 0 -1rem;
   }
 }
-
+#greeting{
+  direction: rtl;
+}
 .links {
   margin-top: 1rem;
   direction: ltr;
