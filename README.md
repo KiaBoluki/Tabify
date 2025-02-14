@@ -62,6 +62,3 @@ If you encounter any issues or have suggestions for improvement, please [open an
 ![Tabify Screenshot](screenshot.png)  
 *Example of Tabify in action with a random background image, quote, and dual calendar display.*
 
----
-
-This enhanced `README.md` provides a clearer description of your extension, adds structure, and includes sections like **Features**, **Installation**, **How It Works**, and **Contributing**. It also fixes grammatical errors and improves readability. Let me know if you’d like further adjustments!
