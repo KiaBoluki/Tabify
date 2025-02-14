@@ -92,6 +92,7 @@ a {
   align-items: center;
   justify-content: space-between;
   direction: rtl;
+  font-size: 1.5rem;
 }
 
 #quote-container {
