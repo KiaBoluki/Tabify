@@ -13,7 +13,7 @@ try {
     greetingElement.textContent = result.greetingMessage;
   });
 } catch (error) {
-  
+  console.log(error)
 }
 
 /**
