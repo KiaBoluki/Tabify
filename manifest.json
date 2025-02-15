@@ -5,6 +5,6 @@
   "version" : "0.0.12",
   "chrome_url_overrides" : { "newtab" : "index.html" },
   "permissions" : [ "tabs","storage" ],
-  "icons" : { "128" : "/assets/images/kia.png" },
+  "icons" : { "128" : "/assets/images/logo.png" },
   "options_page": "/assets/pages/options.html"
 }
