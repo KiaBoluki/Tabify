@@ -1,18 +1,19 @@
-const greetingInput = document.getElementById("greeting");
-const greetingMessage = localStorage.getItem("tabify-greeting-message") ?? "hello"; 
+const greetingMessageInput = document.getElementById("greeting-message-input");
+const greetingMessage = localStorage.getItem("greeting-message") ?? "hello";
+const greetingMessageSwitchEl = document.getElementById("greeting-message-switch"); 
 
 const loadGreeting = () => {
-  return localStorage.getItem("tabify-greeting-message"); 
+  return localStorage.getItem("greeting-message"); 
 }
 
 const saveGreeting = debounce((value) => {
   value = value.trim();
   if (isValidate(value)) {
-    localStorage.setItem("tabify-greeting-message", value);
+    localStorage.setItem("greeting-message", value);
   }
 }, 300);
 
-greetingInput.addEventListener("keyup", (event) => {
+greetingMessageInput.addEventListener("keyup", (event) => {
   saveGreeting(event.target.value);
 });
 
@@ -25,7 +26,8 @@ function debounce(func, wait) {
 }
 
 const loadOptions = () => {
-   greetingInput.value = loadGreeting(); 
+   greetingMessageInput.value = loadGreeting(); 
+   greetingMessageSwitchEl.checked = JSON.parse(localStorage.getItem('show-greeting-message')); 
 }
 
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -36,3 +38,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
 const isValidate = (value) => {
  return value !== undefined && value !== null;
 }
+
+greetingMessageSwitchEl.addEventListener('change', (event)=>{
+  console.log(event.target.checked);
+  // Enable the input if the switch is checked, otherwise disable it
+  greetingMessageInput.disabled = !event.target.checked;
+  localStorage.setItem('show-greeting-message', event.target.checked)
+
+})

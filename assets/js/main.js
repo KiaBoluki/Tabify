@@ -12,7 +12,7 @@ const authorElement = document.getElementById("author");
  */
 function loadGreeting() {
   try {
-    return localStorage.getItem('tabify-greeting-message') ?? "Hello"; 
+    return localStorage.getItem('greeting-message') ?? "Hello"; 
   } catch (error) {
     console.error("Error loading greeting:", error);
   }
@@ -92,7 +92,10 @@ async function getQuote() {
  * - Fetches and displays a random quote.
  */
 document.addEventListener("DOMContentLoaded", () => {
-  greetingElement.textContent = loadGreeting();
+  const showGreetingMessage = JSON.parse(localStorage.getItem("show-greeting-message")); 
+  console.log('show greeting message: ', showGreetingMessage);
+  
+  greetingElement.textContent = showGreetingMessage ? loadGreeting() : "" ;
   updateDateTime();
   setInterval(updateDateTime, 1000);
   getQuote();
