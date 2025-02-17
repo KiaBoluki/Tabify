@@ -3,8 +3,9 @@ const dateElement = document.getElementById("date");
 const timeElement = document.getElementById("time");
 const greetingElement = document.getElementById("greeting");
 const gDateElement = document.getElementById("gDate");
-const quoteElement = document.getElementById("quote");
-const authorElement = document.getElementById("author");
+const quoteElement = document.getElementById("quote-container");
+const qouteTextEl = document.getElementById("qoute-text")
+const qouteAuthorElement = document.getElementById("qoute-author");
 
 /**
  * Fetches and displays the greeting message from Chrome's local storage.
@@ -73,8 +74,8 @@ async function getQuote() {
     const data = await response.json();
 
     if (data.length > 0) {
-      quoteElement.textContent = data[0].content;
-      authorElement.textContent = data[0].author;
+      qouteTextEl.textContent = data[0].content;
+      qouteAuthorElement.textContent = data[0].author;
     } else {
       throw new Error("No quote found in the response.");
     }
@@ -93,10 +94,11 @@ async function getQuote() {
  */
 document.addEventListener("DOMContentLoaded", () => {
   const showGreetingMessage = JSON.parse(localStorage.getItem("show-greeting-message")); 
-  console.log('show greeting message: ', showGreetingMessage);
+  const showWiswQoute = JSON.parse(localStorage.getItem("show-wise-qoute")); 
+  console.log(showWiswQoute);
   
   greetingElement.textContent = showGreetingMessage ? loadGreeting() : "" ;
   updateDateTime();
   setInterval(updateDateTime, 1000);
-  getQuote();
+  showWiswQoute ? getQuote() : quoteElement.style.display= "none"; 
 });
