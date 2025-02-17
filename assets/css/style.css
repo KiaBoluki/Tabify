@@ -1,4 +1,4 @@
-@import './fonts.css';
+@import "./fonts.css";
 * {
   padding: 0;
   margin: 0;
@@ -13,7 +13,6 @@ html {
 body {
   font-family: "Vazirmatn", sans-serif;
   background-color: #121212;
-  
 }
 
 .container {
@@ -23,12 +22,40 @@ body {
   background-size: cover;
   height: 100dvh;
   overflow: hidden;
+}
+
+.appbar {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  & a {
+    display: inline-block;
+    background-color: white;
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 3px;
+    &:hover {
+      scale: 1.05;
+
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    }
+    & img {
+      width: 100%;
+    }
+  }
+}
+.card-container {
+  width: 100%;
+  height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-
 .card {
   background-color: rgba(0, 0, 0, 0.5);
   width: 30%;
@@ -46,7 +73,7 @@ body {
     translate: 0 -1rem;
   }
 }
-#greeting{
+#greeting {
   direction: rtl;
 }
 .links {
@@ -57,7 +84,7 @@ body {
   justify-content: space-between;
 }
 
-a {
+.links > a {
   color: white;
   text-decoration: none;
   gap: 0.25rem;
@@ -100,9 +127,9 @@ a {
 #quote-container {
   font-family: "Playfair Display";
   direction: ltr;
-  transition: all 1s; 
+  transition: all 1s;
   color: white;
-  
+
   & p#quote {
     font-size: 1rem;
     margin-block: 0.7rem;
@@ -120,4 +147,3 @@ a {
 h1 {
   text-align: center;
 }
-
