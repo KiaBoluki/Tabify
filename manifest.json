@@ -2,9 +2,10 @@
   "manifest_version" : 3,
   "name" : "Tabify", 
   "description": "This is a Chrome Extension for new tabs",
-  "version" : "0.0.15",
+  "version" : "0.0.16",
   "chrome_url_overrides" : { "newtab" : "index.html" },
   "permissions" : [ "tabs","storage" ],
   "icons" : { "128" : "/assets/images/logo.png" },
-  "options_page": "/assets/pages/options.html"
+  "options_page": "/assets/pages/options.html", 
+  "update_url": "https://kiaboluki.github.io/Tabify/update.xml"
 }
