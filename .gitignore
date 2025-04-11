@@ -1,5 +1,43 @@
-.vscode
-node_modules
-.vite
-dist
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
+.vite/
+
+# IDE/editor-specific files
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+yarn-error.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Dependency lock files (if not needed in the repo)
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Git-specific files
+.git/
+.gitignore
+
+# Build configuration files (if generated dynamically)
+tsconfig.json
+tsconfig.app.json
+
+# Other project-specific files
 .nojekyll
+update.xml
