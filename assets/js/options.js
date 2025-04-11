@@ -4,6 +4,12 @@ const greetingMessageSwitchEl = document.getElementById(
   "greeting-message-switch"
 );
 const wiseQouteSwitchEl = document.getElementById("wise-qoute-switch");
+const linksVisibilitySwitchEl = document.getElementById(
+  "links-visibility-switch"
+);
+const linksEditorSection = document.getElementById("links-editor-section");
+const linksContainer = document.getElementById("links-container");
+const addLinkBtn = document.getElementById("add-link-btn");
 
 const loadGreeting = () => {
   return localStorage.getItem("greeting-message");
@@ -37,10 +43,17 @@ const loadOptions = () => {
   wiseQouteSwitchEl.checked = JSON.parse(
     localStorage.getItem("show-wise-qoute")
   );
+  linksVisibilitySwitchEl.checked = JSON.parse(
+    localStorage.getItem("show-links-section")
+  );
 };
 
 document.addEventListener("DOMContentLoaded", () => {
   loadOptions();
+  linksEditorSection.style.display = linksVisibilitySwitchEl.checked
+    ? "block"
+    : "none";
+  loadLinks();
 });
 
 const isValidate = (value) => {
@@ -56,4 +69,77 @@ greetingMessageSwitchEl.addEventListener("change", (event) => {
 wiseQouteSwitchEl.addEventListener("change", (event) => {
   console.log(event.target.checked);
   localStorage.setItem("show-wise-qoute", event.target.checked);
+});
+linksVisibilitySwitchEl.addEventListener("change", (event) => {
+  console.log(event.target.checked);
+  localStorage.setItem("show-links-section", event.target.checked);
+  linksEditorSection.style.display = event.target.checked ? "block" : "none";
+});
+
+const loadLinks = () => {
+  const links = JSON.parse(localStorage.getItem("links")) || [];
+  linksContainer.innerHTML = "";
+  links.forEach((link, index) => {
+    const linkRow = document.createElement("div");
+    linkRow.className = "input-group mb-2";
+    linkRow.innerHTML = `
+      <input type="text" class="form-control link-url" placeholder="URL" value="${
+        link.url
+      }" />
+      <input type="text" class="form-control link-name" placeholder="Name" value="${
+        link.name
+      }" />
+      <input type="text" class="form-control link-image" placeholder="Image URL (optional)" value="${
+        link.image || ""
+      }" />
+      <button class="btn btn-danger remove-link-btn" data-index="${index}">Remove</button>
+    `;
+    linksContainer.appendChild(linkRow);
+  });
+  addLinkBtn.disabled = links.length >= 4;
+};
+
+const saveLinks = () => {
+  const links = [];
+  const linkRows = linksContainer.querySelectorAll(".input-group");
+  linkRows.forEach((row) => {
+    const url = row.querySelector(".link-url").value.trim();
+    const name = row.querySelector(".link-name").value.trim();
+    const image = row.querySelector(".link-image").value.trim();
+    if (url && name) {
+      links.push({ url, name, image });
+    }
+  });
+  localStorage.setItem("links", JSON.stringify(links));
+  addLinkBtn.disabled = links.length >= 4;
+};
+
+addLinkBtn.addEventListener("click", () => {
+  const links = JSON.parse(localStorage.getItem("links")) || [];
+  if (links.length < 4) {
+    links.push({ url: "", name: "" });
+    localStorage.setItem("links", JSON.stringify(links));
+    loadLinks();
+  }
+});
+
+linksContainer.addEventListener("click", (event) => {
+  if (event.target.classList.contains("remove-link-btn")) {
+    const index = event.target.dataset.index;
+    const links = JSON.parse(localStorage.getItem("links")) || [];
+    links.splice(index, 1);
+    localStorage.setItem("links", JSON.stringify(links));
+    loadLinks();
+  }
+});
+
+// Update the input event listener to avoid reloading the links unnecessarily
+linksContainer.addEventListener("input", (event) => {
+  if (
+    event.target.classList.contains("link-url") ||
+    event.target.classList.contains("link-name") ||
+    event.target.classList.contains("link-image")
+  ) {
+    saveLinks();
+  }
 });

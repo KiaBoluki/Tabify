@@ -4,8 +4,9 @@ const timeElement = document.getElementById("time");
 const greetingElement = document.getElementById("greeting");
 const gDateElement = document.getElementById("gDate");
 const quoteElement = document.getElementById("quote-container");
-const qouteTextEl = document.getElementById("qoute-text")
+const qouteTextEl = document.getElementById("qoute-text");
 const qouteAuthorElement = document.getElementById("qoute-author");
+const linksElement = document.querySelector(".links");
 
 /**
  * Fetches and displays the greeting message from Chrome's local storage.
@@ -13,7 +14,7 @@ const qouteAuthorElement = document.getElementById("qoute-author");
  */
 function loadGreeting() {
   try {
-    return localStorage.getItem('greeting-message') ?? "Hello"; 
+    return localStorage.getItem("greeting-message") ?? "Hello";
   } catch (error) {
     console.error("Error loading greeting:", error);
   }
@@ -87,18 +88,48 @@ async function getQuote() {
 }
 
 /**
+ * Loads and displays the links from localStorage.
+ */
+const loadLinks = () => {
+  const links = JSON.parse(localStorage.getItem("links")) || [];
+  linksElement.innerHTML = "";
+  links.forEach((link) => {
+    const linkElement = document.createElement("a");
+    linkElement.href = link.url;
+    linkElement.innerHTML = `
+      ${
+        link.image
+          ? `<img src="${link.image}" alt="Link Icon" />`
+          : `<i class="fas fa-link default-icon"></i>`
+      }
+      <span>${link.name}</span>
+    `;
+    linksElement.appendChild(linkElement);
+  });
+};
+
+/**
  * Initializes the extension when the DOM is fully loaded.
  * - Loads the greeting message.
  * - Updates the date and time immediately and every second.
  * - Fetches and displays a random quote.
  */
 document.addEventListener("DOMContentLoaded", () => {
-  const showGreetingMessage = JSON.parse(localStorage.getItem("show-greeting-message")); 
-  const showWiswQoute = JSON.parse(localStorage.getItem("show-wise-qoute")); 
+  const showGreetingMessage = JSON.parse(
+    localStorage.getItem("show-greeting-message")
+  );
+  const showWiswQoute = JSON.parse(localStorage.getItem("show-wise-qoute"));
+  const showLinksSection = JSON.parse(
+    localStorage.getItem("show-links-section")
+  );
   console.log(showWiswQoute);
-  
-  greetingElement.textContent = showGreetingMessage ? loadGreeting() : "" ;
+
+  greetingElement.textContent = showGreetingMessage ? loadGreeting() : "";
   updateDateTime();
   setInterval(updateDateTime, 1000);
-  showWiswQoute ? getQuote() : quoteElement.style.display= "none"; 
+  showWiswQoute ? getQuote() : (quoteElement.style.display = "none");
+  linksElement.style.display = showLinksSection ? "flex" : "none";
+  if (showLinksSection) {
+    loadLinks();
+  }
 });

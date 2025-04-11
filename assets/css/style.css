@@ -79,41 +79,53 @@ body {
 .links {
   margin-top: 1rem;
   direction: ltr;
-  align-items: center;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .links > a {
-  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  gap: 0.25rem;
-  padding: 0.25rem 0.5rem;
-  width: 100%;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.1rem;
+  border-radius: 10px;
+  width: 6rem;
+  height: 6rem;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.links > a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.links > a img {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.links > a .default-icon {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.links > a span {
+  font-size: 0.9rem;
+  font-weight: bold;
   text-align: center;
-  font-size: 0.8rem;
-  line-height: 1.2rem;
-  text-transform: uppercase;
-  transition: all 0.3s;
-  border-bottom: 1px solid transparent;
-  &:hover {
-    cursor: pointer;
-    border-color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-
-  & img {
-    height: 0.9rem;
-    aspect-ratio: 1;
-    object-fit: contain;
-    border-radius: 3px;
-    vertical-align: top;
-  }
-
-  & span {
-    padding: 0;
-    line-height: 0.8rem;
-  }
+  text-transform: capitalize;
 }
 
 .time-date {
