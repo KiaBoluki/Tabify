@@ -92,7 +92,9 @@ const loadLinks = () => {
       <input type="text" class="form-control link-image" placeholder="Image URL (optional)" value="${
         link.image || ""
       }" />
-      <button class="btn btn-danger remove-link-btn" data-index="${index}">Remove</button>
+      <button class="btn btn-danger remove-link-btn" data-index="${index}">
+        <i class="fas fa-trash"></i>
+      </button>
     `;
     linksContainer.appendChild(linkRow);
   });
