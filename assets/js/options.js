@@ -117,7 +117,7 @@ const saveLinks = () => {
     const url = row.querySelector(".link-url").value.trim();
     const name = row.querySelector(".link-name").value.trim();
     if (url && name) {
-      links.push({ url, name });
+      links.push({ url, name }); // Only save links with both URL and name
     }
   });
   localStorage.setItem("links", JSON.stringify(links));
@@ -134,12 +134,16 @@ addLinkBtn.addEventListener("click", () => {
 });
 
 linksContainer.addEventListener("click", (event) => {
-  if (event.target.classList.contains("remove-link-btn")) {
-    const index = event.target.dataset.index;
+  if (
+    event.target.classList.contains("remove-link-btn") ||
+    event.target.closest(".remove-link-btn")
+  ) {
+    const button = event.target.closest(".remove-link-btn"); // Ensure the correct button is targeted
+    const index = button.dataset.index;
     const links = JSON.parse(localStorage.getItem("links")) || [];
-    links.splice(index, 1);
+    links.splice(index, 1); // Remove the link at the specified index
     localStorage.setItem("links", JSON.stringify(links));
-    loadLinks();
+    loadLinks(); // Reload the links to update the UI
   }
 });
 
@@ -149,6 +153,19 @@ linksContainer.addEventListener("input", (event) => {
     event.target.classList.contains("link-url") ||
     event.target.classList.contains("link-name")
   ) {
+    const row = event.target.closest(".input-group");
+    const url = row.querySelector(".link-url").value.trim();
+    const name = row.querySelector(".link-name").value.trim();
+
+    // Disable the save button if fields are empty
+    if (!url || !name) {
+      row.querySelector(".link-url").classList.add("is-invalid");
+      row.querySelector(".link-name").classList.add("is-invalid");
+    } else {
+      row.querySelector(".link-url").classList.remove("is-invalid");
+      row.querySelector(".link-name").classList.remove("is-invalid");
+    }
+
     saveLinks();
   }
 });

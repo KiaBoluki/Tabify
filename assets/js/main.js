@@ -105,19 +105,21 @@ const getIconClass = (url) => {
 const loadLinks = () => {
   const links = JSON.parse(localStorage.getItem("links")) || [];
   linksElement.innerHTML = "";
-  links.forEach((link) => {
-    const linkElement = document.createElement("a");
-    linkElement.href = link.url;
+  links
+    .filter((link) => link.url && link.name) // Filter out links with empty URL or name
+    .forEach((link) => {
+      const linkElement = document.createElement("a");
+      linkElement.href = link.url;
 
-    // Get the appropriate icon class for the URL
-    const iconClass = getIconClass(link.url);
+      // Get the appropriate icon class for the URL
+      const iconClass = getIconClass(link.url);
 
-    linkElement.innerHTML = `
-      <i class="${iconClass}"></i>
-      <span>${link.name}</span>
-    `;
-    linksElement.appendChild(linkElement);
-  });
+      linkElement.innerHTML = `
+        <i class="${iconClass}"></i>
+        <span>${link.name}</span>
+      `;
+      linksElement.appendChild(linkElement);
+    });
 };
 
 /**
