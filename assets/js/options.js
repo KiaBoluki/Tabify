@@ -1,3 +1,5 @@
+import { iconMappings } from "./iconMappings.js";
+
 const greetingMessageInput = document.getElementById("greeting-message-input");
 const greetingMessage = localStorage.getItem("greeting-message") ?? "hello";
 const greetingMessageSwitchEl = document.getElementById(
@@ -76,22 +78,29 @@ linksVisibilitySwitchEl.addEventListener("change", (event) => {
   linksEditorSection.style.display = event.target.checked ? "block" : "none";
 });
 
+/**
+ * Finds the appropriate FontAwesome icon class for a given URL.
+ * @param {string} url - The URL to check.
+ * @returns {string} - The FontAwesome icon class.
+ */
+const getIconClass = (url) => {
+  const mapping = iconMappings.find((entry) => url.includes(entry.keyword));
+  return mapping ? mapping.iconClass : "fas fa-link default-icon";
+};
+
 const loadLinks = () => {
   const links = JSON.parse(localStorage.getItem("links")) || [];
   linksContainer.innerHTML = "";
   links.forEach((link, index) => {
+    const iconClass = getIconClass(link.url);
     const linkRow = document.createElement("div");
     linkRow.className = "input-group mb-2";
     linkRow.innerHTML = `
-      <input type="text" class="form-control link-url" placeholder="URL" value="${
-        link.url
-      }" />
-      <input type="text" class="form-control link-name" placeholder="Name" value="${
-        link.name
-      }" />
-      <input type="text" class="form-control link-image" placeholder="Image URL (optional)" value="${
-        link.image || ""
-      }" />
+      <span class="input-group-text">
+        <i class="${iconClass}"></i>
+      </span>
+      <input type="text" class="form-control link-url" placeholder="URL" value="${link.url}" />
+      <input type="text" class="form-control link-name" placeholder="Name" value="${link.name}" />
       <button class="btn btn-danger remove-link-btn" data-index="${index}">
         <i class="fas fa-trash"></i>
       </button>
@@ -107,9 +116,8 @@ const saveLinks = () => {
   linkRows.forEach((row) => {
     const url = row.querySelector(".link-url").value.trim();
     const name = row.querySelector(".link-name").value.trim();
-    const image = row.querySelector(".link-image").value.trim();
     if (url && name) {
-      links.push({ url, name, image });
+      links.push({ url, name });
     }
   });
   localStorage.setItem("links", JSON.stringify(links));
@@ -139,8 +147,7 @@ linksContainer.addEventListener("click", (event) => {
 linksContainer.addEventListener("input", (event) => {
   if (
     event.target.classList.contains("link-url") ||
-    event.target.classList.contains("link-name") ||
-    event.target.classList.contains("link-image")
+    event.target.classList.contains("link-name")
   ) {
     saveLinks();
   }

@@ -1,3 +1,5 @@
+import { iconMappings } from "./iconMappings.js";
+
 // DOM Elements
 const dateElement = document.getElementById("date");
 const timeElement = document.getElementById("time");
@@ -88,6 +90,16 @@ async function getQuote() {
 }
 
 /**
+ * Finds the appropriate FontAwesome icon class for a given URL.
+ * @param {string} url - The URL to check.
+ * @returns {string} - The FontAwesome icon class.
+ */
+const getIconClass = (url) => {
+  const mapping = iconMappings.find((entry) => url.includes(entry.keyword));
+  return mapping ? mapping.iconClass : "fas fa-link default-icon";
+};
+
+/**
  * Loads and displays the links from localStorage.
  */
 const loadLinks = () => {
@@ -96,12 +108,12 @@ const loadLinks = () => {
   links.forEach((link) => {
     const linkElement = document.createElement("a");
     linkElement.href = link.url;
+
+    // Get the appropriate icon class for the URL
+    const iconClass = getIconClass(link.url);
+
     linkElement.innerHTML = `
-      ${
-        link.image
-          ? `<img src="${link.image}" alt="Link Icon" />`
-          : `<i class="fas fa-link default-icon"></i>`
-      }
+      <i class="${iconClass}"></i>
       <span>${link.name}</span>
     `;
     linksElement.appendChild(linkElement);
