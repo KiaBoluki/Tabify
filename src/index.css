@@ -1,6 +1,9 @@
 @import "tailwindcss";
-
-@theme{
-    --font-fair: "Playfair Display"; 
-    --font-vazir: "Vazirmatn"; 
+@font-face {
+  font-family: "Vazirmatn";
+  src: url("../assets/font/Vazirmatn-Regular.ttf");
+}
+@theme {
+  --font-fair: "Playfair Display";
+  --font-vazir: "Vazirmatn";
 }
