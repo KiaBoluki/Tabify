@@ -9,6 +9,7 @@ const quoteElement = document.getElementById("quote-container");
 const qouteTextEl = document.getElementById("qoute-text");
 const qouteAuthorElement = document.getElementById("qoute-author");
 const linksElement = document.querySelector(".links");
+const hijriDateElement = document.getElementById("hijriDate");
 
 /**
  * Fetches and displays the greeting message from Chrome's local storage.
@@ -35,7 +36,7 @@ function updateDateTime() {
   const persianDate = now.toLocaleDateString("fa-IR", {
     weekday: "long",
     day: "2-digit",
-    month: "long",
+    month: "short",
   });
 
   const persianTime = now.toLocaleTimeString("fa-IR", {
@@ -49,10 +50,17 @@ function updateDateTime() {
     day: "2-digit",
   });
 
+  const hijriDate = now.toLocaleDateString("ar-SA-u-ca-islamic-umalqura", {
+    month: "long",
+    year: "numeric",
+    day: "2-digit",
+  });
+
   // Update DOM elements
   dateElement.textContent = persianDate;
   timeElement.textContent = persianTime;
   gDateElement.textContent = gregorianDate;
+  hijriDateElement.textContent = hijriDate;
 }
 
 /**

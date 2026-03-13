@@ -1,66 +1,54 @@
 import { useState, useEffect } from "react";
 
-export const PersianDate = () => {
+const useCurrentTime = (intervalMs = 1000) => {
   const [currentTime, setCurrentTime] = useState(new Date());
-  const persianDate = currentTime.toLocaleDateString("fa-IR", {
-    day: "2-digit",
-    weekday: "long",
-    month: "long",
-  });
+  useEffect(() => {
+    const interval = setInterval(() => setCurrentTime(new Date()), intervalMs);
+    return () => clearInterval(interval);
+  }, [intervalMs]);
+  return currentTime;
+};
 
-   useEffect(() => {
-     const interval = setInterval(() => {
-       setCurrentTime(new Date());
-     }, 1000);
+export const PersianDate = () => {
+  const time = useCurrentTime();
+  return (
+    <div>
+      {time.toLocaleDateString("fa-IR", {
+        day: "2-digit", weekday: "long", month: "long", year: "numeric",
+      })}
+    </div>
+  );
+};
 
-     // Cleanup interval on component unmount
-     return () => clearInterval(interval);
-   }, []);
-
-  return <div>{persianDate}</div>;
+export const HijriDate = () => {
+  const time = useCurrentTime();
+  return (
+    <div>
+      {time.toLocaleDateString("ar-SA-u-ca-islamic-umalqura", {
+        day: "2-digit",
+        weekday: "long",
+        year: "numeric",
+      })}
+    </div>
+  );
 };
 
 export const PersianTime = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
-
-const persianTime = currentTime.toLocaleTimeString("fa-IR", {
-  hour: "2-digit",
-  minute: "2-digit",
-});
+  const time = useCurrentTime();
   return (
     <div>
-      {persianTime}
+      {time.toLocaleTimeString("fa-IR", { hour: "2-digit", minute: "2-digit" })}
     </div>
-  ); 
+  );
 };
 
 const DateTime = () => {
-  const [currentTime, setCurrentTime] = useState(new Date());
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(new Date());
-    }, 1000);
-
-    // Cleanup interval on component unmount
-    return () => clearInterval(interval);
-  }, []);
-
+  const time = useCurrentTime();
   return (
     <div className="ltr font-thin">
-      {currentTime.toLocaleDateString('en-US', {
-        month:"long", day: "2-digit"
-      })}
+      {time.toLocaleDateString("en-US", { month: "long", day: "2-digit" })}
     </div>
-  ); 
+  );
 };
 
 export default DateTime;
