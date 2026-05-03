@@ -4,8 +4,8 @@ const FETCH_INTERVAL = 5 * 60 * 1000; // 5 minutes
 
 async function fetchUsdPrice(): Promise<string | null> {
   try {
-    const response = await fetch("https://alanchand.com", {
-      headers: { "Accept": "text/html" },
+    const response = await fetch("https://alanchand.com/currencies-price/usd", {
+      headers: { Accept: "text/html" },
     });
     if (!response.ok) throw new Error("Failed to fetch");
     const html = await response.text();

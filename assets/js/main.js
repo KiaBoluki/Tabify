@@ -144,7 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const showLinksSection = JSON.parse(
     localStorage.getItem("show-links-section")
   );
-  console.log(showWiswQoute);
 
   greetingElement.textContent = showGreetingMessage ? loadGreeting() : "";
   updateDateTime();

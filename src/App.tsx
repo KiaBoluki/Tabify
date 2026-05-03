@@ -18,11 +18,11 @@ function App() {
           <DateTime />
           <div>Hello</div>
         </div>
-        <UsdPrice />
         <div className="flex items-center justify-between my-6">
           <PersianTime />
           <PersianDate />
           <HijriDate />
+          <UsdPrice />
         </div>
         <div className="my-6">
           <Qoute />
