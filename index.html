@@ -4,69 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tabify</title>
-    <!-- My Styles -->
-    <link rel="stylesheet" href="assets/css/style.css" />
-    <!-- Font Awesome Free Icons -->
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
   </head>
-
-  <body class="lazy">
-    <div class="container">
-      <div class="appbar">
-        <a href="assets/pages/options.html" id="btn-settings" title="Options">
-          <i class="fa-solid fa-sliders"></i>
-        </a>
-      </div>
-      <div class="card-container">
-        <div class="card">
-          <h1 id="gDate"></h1>
-          <h3 id="hijriDate"></h3>
-          <!-- Date and Time Section -->
-          <div class="time-date">
-            <p id="date">نامشخص</p>
-            <p id="time">00:00</p>
-          </div>
-          <!-- Greeting Section -->
-          <h1
-            id="greeting"
-            title="You can modify this message in the options page."
-          ></h1>
-          <!-- End Of Links -->
-          <div id="quote-container">
-            <i
-              class="fas fa-quote-left"
-              id="qoute-icon"
-              role="img"
-              aria-hidden="true"
-            ></i>
-            <p id="qoute-text"></p>
-            <p id="qoute-author"></p>
-          </div>
-          <!-- Links Section -->
-          <div class="links">
-            <!-- Instagram -->
-            <a href="https://instagram.com/KiaBoluki">
-              <span>Instagram</span>
-            </a>
-            <!-- Youtube -->
-            <a href="https://bit.ly/3zZ5D8H">
-              <span>Youtube</span>
-            </a>
-            <!-- Aparat -->
-            <a href="https://aparat.com/KiaBoluki">
-              <span>Aparat</span>
-            </a>
-            <!-- Telegram -->
-            <a href="https://t.me/KiaBolukiTutorials">
-              <span>Telegram</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <script src="assets/js/main.js" type="module"></script>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

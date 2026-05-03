@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LINK_DETAILS, DetailsProps } from "./linkDetails";
+import { LINK_DETAILS, type DetailsProps } from "./linkDetails";
 interface LinkProps {
   to: string;
 }

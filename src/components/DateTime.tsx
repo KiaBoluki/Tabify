@@ -14,7 +14,9 @@ export const PersianDate = () => {
   return (
     <div>
       {time.toLocaleDateString("fa-IR", {
-        day: "2-digit", weekday: "long", month: "long", year: "numeric",
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
       })}
     </div>
   );

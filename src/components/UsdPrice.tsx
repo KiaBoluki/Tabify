@@ -1,12 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 
-const FETCH_INTERVAL = 5 * 60 * 1000; // 5 minutes
+const FETCH_INTERVAL = 1 * 60 * 1000; // 1 minute
 
 async function fetchUsdPrice(): Promise<string | null> {
   try {
-    const response = await fetch("https://alanchand.com/currencies-price/usd", {
-      headers: { Accept: "text/html" },
-    });
+    const url = import.meta.env.DEV
+      ? "/api/usd"
+      : "https://alanchand.com/currencies-price/usd";
+
+    const response = await fetch(url, { headers: { Accept: "text/html" } });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const html = await response.text();
 
@@ -26,7 +28,6 @@ const UsdPrice = () => {
   const [price, setPrice] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
 
   const refresh = useCallback(async () => {
     setLoading(true);
@@ -34,7 +35,6 @@ const UsdPrice = () => {
     const result = await fetchUsdPrice();
     if (result) {
       setPrice(result);
-      setLastUpdated(new Date());
     } else {
       setError(true);
     }
@@ -49,30 +49,20 @@ const UsdPrice = () => {
 
   return (
     <div className="mt-4 flex items-center justify-between text-white">
-      <div className="flex items-center gap-2">
-        <span className="text-green-400 text-lg font-bold">$</span>
-        <span className="text-sm font-light text-white/70">USD / TMN</span>
-      </div>
-
       <div className="text-right">
         {loading ? (
           <span className="text-sm text-white/50 animate-pulse">
             Loading...
           </span>
         ) : error ? (
-          <span className="text-sm text-red-400">Unavailable</span>
+          <span className="text-sm text-red-400">Failed</span>
         ) : (
-          <span className="text-lg font-semibold tracking-wide">
-            {price}{" "}
-            <span className="text-xs text-white/50 font-light">تومان</span>
-          </span>
-        )}
-        {lastUpdated && !loading && (
-          <div className="text-xs text-white/40 mt-0.5">
-            {lastUpdated.toLocaleTimeString("fa-IR", {
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+          <div>
+            <span className="text-xs text-white/50 font-light">USD: </span>
+            <span className="text-lg font-semibold tracking-wide">
+              {price}{" "}
+              <span className="text-xs text-white/50 font-light">تومان</span>
+            </span>
           </div>
         )}
       </div>
