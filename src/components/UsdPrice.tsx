@@ -7,16 +7,17 @@ async function fetchUsdPrice(): Promise<string | null> {
     const response = await fetch("https://alanchand.com/currencies-price/usd", {
       headers: { Accept: "text/html" },
     });
-    if (!response.ok) throw new Error("Failed to fetch");
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const html = await response.text();
 
-    // Parse the HTML and extract the sell-price td
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    const cell = doc.querySelector("td.sellPrice");
-    return cell ? cell.textContent?.trim() ?? null : null;
+
+    // First span.fw-bold.text-success.fs-5 is the sell price
+    const cell = doc.querySelector("span.fw-bold.text-success.fs-5");
+    return cell ? (cell.textContent?.trim() ?? null) : null;
   } catch (err) {
-    console.error("UsdPrice fetch error:", err);
+    console.error("[UsdPrice] Fetch error:", err);
     return null;
   }
 }
@@ -49,19 +50,21 @@ const UsdPrice = () => {
   return (
     <div className="mt-4 flex items-center justify-between text-white">
       <div className="flex items-center gap-2">
-        {/* Dollar icon */}
         <span className="text-green-400 text-lg font-bold">$</span>
         <span className="text-sm font-light text-white/70">USD / TMN</span>
       </div>
 
       <div className="text-right">
         {loading ? (
-          <span className="text-sm text-white/50 animate-pulse">Loading...</span>
+          <span className="text-sm text-white/50 animate-pulse">
+            Loading...
+          </span>
         ) : error ? (
           <span className="text-sm text-red-400">Unavailable</span>
         ) : (
           <span className="text-lg font-semibold tracking-wide">
-            {price} <span className="text-xs text-white/50 font-light">تومان</span>
+            {price}{" "}
+            <span className="text-xs text-white/50 font-light">تومان</span>
           </span>
         )}
         {lastUpdated && !loading && (
