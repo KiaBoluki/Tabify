@@ -28,18 +28,44 @@ const UsdPrice = () => {
   const [price, setPrice] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [omrPrice, setOmrPrice] = useState<string | null>(null);
+
+  // Constants
+  const USD_TO_OMR_RATE = 0.3845; //
+  const FETCH_INTERVAL = 60000; // Example 1 minute
+
+  const toEnglishDigits = (str: string) => {
+    return str.replace(/[٠-٩]/g, (d) => (d.charCodeAt(0) - 1632).toString());
+  };
+
+  const calculateOmrPrice = useCallback((usdPriceStr: string) => {
+    // Clean string of commas and convert Arabic digits
+    const normalizedStr = toEnglishDigits(usdPriceStr).replace(/,/g, "");
+    const usdValue = parseFloat(normalizedStr);
+
+    if (!isNaN(usdValue)) {
+      const converted = (usdValue * USD_TO_OMR_RATE).toFixed(3);
+      setOmrPrice(converted);
+    }
+  }, []);
 
   const refresh = useCallback(async () => {
     setLoading(true);
     setError(false);
-    const result = await fetchUsdPrice();
-    if (result) {
-      setPrice(result);
-    } else {
+    try {
+      const result = await fetchUsdPrice();
+      if (result) {
+        setPrice(result);
+        calculateOmrPrice(result);
+      } else {
+        setError(true);
+      }
+    } catch (err) {
       setError(true);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
-  }, []);
+  }, [calculateOmrPrice]);
 
   useEffect(() => {
     refresh();
@@ -49,25 +75,33 @@ const UsdPrice = () => {
 
   return (
     <div className="mt-4 flex items-center justify-between text-white">
-      <div className="text-right">
-        {loading ? (
+      <div className="text-right w-full">
+        {loading && !price ? (
           <span className="text-sm text-white/50 animate-pulse">
             Loading...
           </span>
         ) : error ? (
-          <span className="text-sm text-red-400">Failed</span>
+          <span className="text-sm text-red-400">Failed to fetch price</span>
         ) : (
-          <div>
-            <span className="text-xs text-white/50 font-light">USD: </span>
-            <span className="text-lg font-semibold tracking-wide">
-              {price}{" "}
-              <span className="text-xs text-white/50 font-light">تومان</span>
-            </span>
+          <div className="w-full flex items-center justify-between space-x-5">
+            <div>
+              <span className="text-xs text-white/50 font-light">USD: </span>
+              <span className="text-lg font-semibold tracking-wide">
+                ${price}
+              </span>
+            </div>
+            <div>
+              <span className="text-xs text-white/50 font-light">OMR: </span>
+              <span className="text-lg font-semibold tracking-wide">
+                {omrPrice} <span className="text-xs">ر.ع.</span>
+              </span>
+            </div>
           </div>
         )}
       </div>
     </div>
   );
 };
+
 
 export default UsdPrice;
