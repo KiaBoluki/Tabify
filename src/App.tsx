@@ -1,27 +1,34 @@
 import "./App.css";
-import Card from "./components/Card";
-import {
-  PersianDate,
-  PersianTime,
-} from "./components/DateTime";
-
-import UsdPrice from "./components/UsdPrice";
-import Wrapper from "./components/Wrapper";
+import { useUsdPrice } from "./hooks/useUsdPrice";
+import DateTimeCard from "./components/features/DateTimeCard";
+import CurrencyCard from "./components/features/CurrencyCard";
+import QuoteCard from "./components/features/QuoteCard";
 
 function App() {
+  const usd = useUsdPrice();
+
   return (
-    <Wrapper>
-      <Card>
-        <UsdPrice />
-        <div className="flex items-center justify-center">
-        </div>
-        <div className="flex items-center justify-between my-6">
-          <PersianTime />
-          <PersianDate />
-          {/* <HijriDate /> */}
-        </div>
-      </Card>
-    </Wrapper>
+    <div className="app">
+      <div className="app__bg" />
+      <div className="app__noise" />
+
+      <main className="app__panel">
+        <header className="panel__header">
+          <div className="panel__accent" />
+          <span className="panel__brand">TABIFY</span>
+        </header>
+
+        <DateTimeCard />
+
+        <div className="panel__divider" />
+
+        <CurrencyCard usd={usd} />
+
+        <div className="panel__divider" />
+
+        <QuoteCard />
+      </main>
+    </div>
   );
 }
 

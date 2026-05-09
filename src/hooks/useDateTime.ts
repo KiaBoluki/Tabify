@@ -18,7 +18,7 @@ export function useDateTime(): DateTimeState {
   const gregorian = now.toLocaleDateString("en-US", {
     weekday: "long",
     month: "long",
-    day: "numeric",
+    day: "2-digit",
   });
 
   const persian = now.toLocaleDateString("fa-IR", {

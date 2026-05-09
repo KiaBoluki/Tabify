@@ -1,8 +1,11 @@
-import { QUOTE_API_URL } from "../constants";
 import type { Quote } from "../types";
 
 const CACHE_KEY = "tabify-quote";
 const CACHE_TTL = 60 * 60 * 1000; // 1 hour
+
+const QUOTE_URL = import.meta.env.DEV
+  ? "/api/quote"
+  : "https://dummyjson.com/quotes/random";
 
 interface CachedQuote {
   quote: Quote;
@@ -23,8 +26,10 @@ function getCache(): Quote | null {
 
 function setCache(quote: Quote) {
   try {
-    const payload: CachedQuote = { quote, fetchedAt: Date.now() };
-    sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+    sessionStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify({ quote, fetchedAt: Date.now() })
+    );
   } catch {
     // sessionStorage may be unavailable in extension context
   }
@@ -35,10 +40,11 @@ export async function fetchQuote(): Promise<Quote | null> {
   if (cached) return cached;
 
   try {
-    const response = await fetch(QUOTE_API_URL);
+    const response = await fetch(QUOTE_URL);
     if (!response.ok) throw new Error("Failed to fetch quote");
     const data = await response.json();
-    const quote: Quote = { content: data[0].content, author: data[0].author };
+    // dummyjson returns { id, quote, author }
+    const quote: Quote = { content: data.quote, author: data.author };
     setCache(quote);
     return quote;
   } catch (err) {
