@@ -5,7 +5,11 @@
   "version": "0.0.17",
   "chrome_url_overrides": { "newtab": "index.html" },
   "permissions": ["tabs", "storage"],
-  "host_permissions": ["https://alanchand.com/*"],
+  "host_permissions": [
+    "https://alanchand.com/*",
+    "https://dummyjson.com/*",
+    "https://fonts.googleapis.com/*"  
+  ],
   "icons": { "128": "/assets/images/logo.png" },
   "options_page": "/assets/pages/options.html",
   "update_url": "https://kiaboluki.github.io/Tabify/update.xml"
