@@ -1,11 +1,326 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Vazirmatn:wght@100..900&display=swap');
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root {
+  --bg:             #0a0a0c;
+  --panel-bg:       rgba(14, 14, 18, 0.82);
+  --panel-border:   rgba(255, 255, 255, 0.07);
+  --accent:         #c9a96e;
+  --accent-dim:     rgba(201, 169, 110, 0.15);
+  --text-primary:   rgba(255, 255, 255, 0.92);
+  --text-secondary: rgba(255, 255, 255, 0.38);
+  --text-tertiary:  rgba(255, 255, 255, 0.18);
+  --mono:           'DM Mono', monospace;
+  --serif:          'Cormorant Garamond', serif;
+  --sans:           'Vazirmatn', sans-serif;
+  --radius:         16px;
+  --panel-w:        420px;
+}
 
-.wrapper{
-    background-image: url('https://picsum.photos/1280/760');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
-    color: white; 
-    font-weight: bold;
+/* ─── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── App shell ──────────────────────────────────────────── */
+.app {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Background image */
+.app__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://picsum.photos/1600/900?grayscale');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.22) saturate(0.4);
+  z-index: 0;
+}
+
+/* Noise texture overlay */
+.app__noise {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 128px;
+}
+
+/* ─── Panel ──────────────────────────────────────────────── */
+.app__panel {
+  position: relative;
+  z-index: 2;
+  width: var(--panel-w);
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 28px 32px 32px;
+  backdrop-filter: blur(24px) saturate(1.4);
+  -webkit-backdrop-filter: blur(24px) saturate(1.4);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 32px 80px rgba(0,0,0,0.7),
+    0 2px 4px rgba(0,0,0,0.4);
+  animation: panel-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes panel-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── Panel header ───────────────────────────────────────── */
+.panel__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.panel__accent {
+  width: 3px;
+  height: 14px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.panel__brand {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+/* ─── Divider ────────────────────────────────────────────── */
+.panel__divider {
+  height: 1px;
+  background: var(--panel-border);
+  margin: 24px 0;
+}
+
+/* ─── DateTime card ──────────────────────────────────────── */
+.datetime-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.datetime-card__time {
+  font-family: var(--mono);
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1;
+  background: linear-gradient(135deg, #fff 60%, rgba(255,255,255,0.55));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.datetime-card__divider {
+  width: 32px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0.6;
+}
+
+.datetime-card__dates {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.datetime-card__gregorian {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+}
+
+.datetime-card__persian {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 200;
+  color: var(--text-tertiary);
+  direction: rtl;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Currency card ──────────────────────────────────────── */
+.currency-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ─── Price row ──────────────────────────────────────────── */
+.price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-row__left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.price-row__symbol {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--accent);
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.price-row__labels {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.price-row__code {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: 0.08em;
+}
+
+.price-row__label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 200;
+  color: var(--text-tertiary);
+  direction: rtl;
+}
+
+.price-row__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.price-row__value {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.price-row__unit {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 200;
+  color: var(--text-tertiary);
+  direction: rtl;
+}
+
+.price-row__error {
+  font-family: var(--mono);
+  font-size: 18px;
+  color: var(--text-tertiary);
+}
+
+/* ─── Quote card ─────────────────────────────────────────── */
+.quote-card {
+  position: relative;
+  padding-left: 16px;
+  border-left: 1px solid var(--accent-dim);
+}
+
+.quote-card__mark {
+  position: absolute;
+  top: -8px;
+  left: -6px;
+  font-family: var(--serif);
+  font-size: 32px;
+  color: var(--accent);
+  opacity: 0.5;
+  line-height: 1;
+}
+
+.quote-card__content {
+  font-family: var(--serif);
+  font-size: 13.5px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+.quote-card__author {
+  margin-top: 8px;
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+}
+
+/* ─── Quote shimmer ──────────────────────────────────────── */
+.quote-card__loading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quote-card__shimmer {
+  height: 12px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--panel-border) 25%,
+    rgba(255,255,255,0.06) 50%,
+    var(--panel-border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  width: 100%;
+}
+
+.quote-card__shimmer--short {
+  width: 55%;
+}
+
+@keyframes shimmer {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+
+/* ─── Spinner ────────────────────────────────────────────── */
+.animate-spin {
+  animation: spin 0.9s linear infinite;
+  color: var(--accent);
+  opacity: 0.7;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
