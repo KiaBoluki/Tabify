@@ -1,0 +1,155 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  color: white;
+}
+
+body {
+  font-family: "Vazirmatn", sans-serif;
+  background-color: #131313;
+}
+
+.container {
+  background-image: url("https://picsum.photos/1280/720");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.appbar {
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  & a {
+    display: inline-block;
+    background-color: white;
+    border-radius: 5px;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    padding: 3px;
+    transition: all 0.3s ease-in-out;
+    &:hover {
+      scale: 1.05;
+      box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+    }
+  }
+}
+.card-container {
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.card {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 30%;
+  min-height: 30%;
+  padding: 1rem;
+  border-radius: 1rem;
+  min-width: 30rem;
+  min-height: 10rem;
+  font-family: "Vazirmatn", sans;
+  transition: all 300ms ease-in-out;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    scale: 1.05;
+    translate: 0 -1rem;
+  }
+}
+#greeting {
+  direction: rtl;
+}
+.links {
+  margin-top: 1rem;
+  direction: ltr;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.links > a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem; /* Reduced padding */
+  border-radius: 5px; /* Reduced border radius */
+  width: 4rem; /* Reduced width */
+  height: 4rem; /* Reduced height */
+  font-size: 0.8rem; /* Reduced font size */
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Adjusted shadow */
+}
+
+.links > a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px); /* Adjusted hover effect */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.links > a img {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.links > a .default-icon {
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.links > a span {
+  font-size: 0.7rem; /* Reduced text size */
+  font-weight: bold;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.time-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  direction: rtl;
+  font-size: 1.5rem;
+}
+
+#quote-container {
+  font-family: "Playfair Display";
+  direction: ltr;
+  transition: all 1s;
+  color: white;
+
+  & p#quote {
+    font-size: 1rem;
+    margin-block: 0.7rem;
+  }
+  & p#author {
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  text-align: center;
+}

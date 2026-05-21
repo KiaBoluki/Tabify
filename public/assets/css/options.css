@@ -1,0 +1,29 @@
+.is-invalid {
+  border-color: red;
+  background-color: #ffe6e6;
+}
+
+.options-page {
+  background-image: url("https://picsum.photos/1920/1080?grayscale"); /* Replace with your desired image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white; /* Ensure text is white for contrast */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Dark overlay for better text visibility */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
